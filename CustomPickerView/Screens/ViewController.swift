@@ -28,19 +28,22 @@ class ViewController: UIViewController {
         view.addSubview(pickerView)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.dataSource = self
+        pickerView.delegate = self
         
         NSLayoutConstraint.activate([
             pickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             pickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             pickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            pickerView.heightAnchor.constraint(equalToConstant: 100)
+            pickerView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
 }
 
 // MARK: - UIPickerViewDataSource
 
-extension ViewController: UIPickerViewDataSource {
+extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    // MARK: - Data Source
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
@@ -56,6 +59,16 @@ extension ViewController: UIPickerViewDataSource {
         default:
             return 0
         }
+    }
+    
+    // MARK: - Delegate
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 40
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return 70
     }
     
 }
