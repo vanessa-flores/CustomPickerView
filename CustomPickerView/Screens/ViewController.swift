@@ -21,10 +21,13 @@ class ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         configurePickerView()
     }
+    
+    // MARK: - UI Configuration
 
     private func configurePickerView() {
         view.addSubview(pickerView)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.dataSource = self
         
         NSLayoutConstraint.activate([
             pickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
@@ -35,3 +38,24 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - UIPickerViewDataSource
+
+extension ViewController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return TimePicker.timeValues(for: .hours).count
+        case 1:
+            return TimePicker.timeValues(for: .minutes).count
+        case 2: return TimePicker.timeValues(for: .seconds).count
+        default:
+            return 0
+        }
+    }
+    
+}

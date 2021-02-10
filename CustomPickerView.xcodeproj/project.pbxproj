@@ -12,6 +12,7 @@
 		A365440E25D4A25700D94ADC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365440D25D4A25700D94ADC /* ViewController.swift */; };
 		A365441325D4A25700D94ADC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A365441225D4A25700D94ADC /* Assets.xcassets */; };
 		A365441625D4A25700D94ADC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A365441425D4A25700D94ADC /* LaunchScreen.storyboard */; };
+		A365442825D4A64500D94ADC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365442725D4A64500D94ADC /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		A365441525D4A25700D94ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A365441725D4A25700D94ADC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A365441E25D4A26800D94ADC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A365442725D4A64500D94ADC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				A365442325D4A2B100D94ADC /* Support */,
+				A365442625D4A63600D94ADC /* Utilities */,
 				A365442125D4A2A400D94ADC /* Screens */,
 				A365441725D4A25700D94ADC /* Info.plist */,
 			);
@@ -80,6 +83,14 @@
 				A365441425D4A25700D94ADC /* LaunchScreen.storyboard */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		A365442625D4A63600D94ADC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A365442725D4A64500D94ADC /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +165,7 @@
 				A365440E25D4A25700D94ADC /* ViewController.swift in Sources */,
 				A365440A25D4A25700D94ADC /* AppDelegate.swift in Sources */,
 				A365440C25D4A25700D94ADC /* SceneDelegate.swift in Sources */,
+				A365442825D4A64500D94ADC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
