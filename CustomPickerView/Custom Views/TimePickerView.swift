@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TimePickerView: UIPickerView {
+class SeparatorLabel: UILabel {
     
     // MARK: - Initializers
     
@@ -23,7 +23,9 @@ class TimePickerView: UIPickerView {
     // MARK: - UI Configuration
     
     private func configure() {
+        text = ":"
+        font = UIFont.preferredFont(forTextStyle: .title1)
         translatesAutoresizingMaskIntoConstraints = false
     }
+    
 }
-

@@ -14,6 +14,14 @@ class ViewController: UIViewController {
     let hoursPickerView = UIPickerView(frame: .zero)
     let minutesPickerView = UIPickerView(frame: .zero)
     let secondsPickerView = UIPickerView(frame: .zero)
+    let firstSeparator = SeparatorLabel(frame: .zero)
+    let secondSeparator = SeparatorLabel(frame: .zero)
+    
+    // MARK: - Properties
+    
+    let separatorPadding: CGFloat = 2
+    let pickerViewWidth: CGFloat = 60
+    let pickerViewHeight: CGFloat = 50
 
     // MARK: - Lifecycle
     
@@ -28,49 +36,73 @@ class ViewController: UIViewController {
 
     private func configurePickerViews() {
         configureHoursPickerView()
+        configureSeparator(isFirst: true)
         configureMinutesPickerView()
+        configureSeparator(isFirst: false)
+        configureSecondsPickerView()
     }
     
     private func configureHoursPickerView() {
-        view.addSubview(hoursPickerView)
-        hoursPickerView.translatesAutoresizingMaskIntoConstraints = false
-        hoursPickerView.dataSource = self
-        hoursPickerView.delegate = self
+        setupPickerView(hoursPickerView)
         
         NSLayoutConstraint.activate([
             hoursPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             hoursPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            hoursPickerView.heightAnchor.constraint(equalToConstant: 50),
-            hoursPickerView.widthAnchor.constraint(equalToConstant: 70)
+            hoursPickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight),
+            hoursPickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
         ])
     }
     
     private func configureMinutesPickerView() {
-        view.addSubview(minutesPickerView)
-        minutesPickerView.translatesAutoresizingMaskIntoConstraints = false
-        minutesPickerView.dataSource = self
-        minutesPickerView.delegate = self
+        setupPickerView(minutesPickerView)
         
         NSLayoutConstraint.activate([
             minutesPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-//            minutesPickerView.leadingAnchor.constraint(equalTo: )
+            minutesPickerView.leadingAnchor.constraint(equalTo: firstSeparator.trailingAnchor, constant: separatorPadding),
+            minutesPickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight),
+            minutesPickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
         ])
     }
     
-    private func configureSeparatorLabel(for timeType: TimePicker.TimeType) {
-        let label = UILabel()
-        label.text = ":"
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+    private func configureSecondsPickerView() {
+        setupPickerView(secondsPickerView)
         
-        view.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            secondsPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            secondsPickerView.leadingAnchor.constraint(equalTo: secondSeparator.trailingAnchor, constant: separatorPadding),
+            secondsPickerView.heightAnchor.constraint(equalToConstant: 50),
+            secondsPickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
+        ])
+    }
+    
+    private func configureSeparator(isFirst: Bool) {
+        let leadingAnchor: NSLayoutXAxisAnchor
+        let separator: SeparatorLabel
         
-//        let leadingConstraint = NSLayoutConstraint(
+        if isFirst {
+            view.addSubview(firstSeparator)
+            leadingAnchor = hoursPickerView.trailingAnchor
+            separator = firstSeparator
+        } else {
+            view.addSubview(secondSeparator)
+            leadingAnchor = minutesPickerView.trailingAnchor
+            separator = secondSeparator
+        }
         
-//        NSLayoutConstraint.activate([
-//            label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-//
-//        ])
+        NSLayoutConstraint.activate([
+            separator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: separatorPadding),
+            separator.widthAnchor.constraint(equalToConstant: 4)
+        ])
+    }
+    
+    // MARK: - Helpers
+    
+    private func setupPickerView(_ pickerView: UIPickerView) {
+        view.addSubview(pickerView)
+        pickerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.dataSource = self
+        pickerView.delegate = self
     }
 }
 
