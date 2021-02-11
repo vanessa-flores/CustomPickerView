@@ -9,6 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    enum Separator {
+        case first, second
+    }
+    
     // MARK: - UI Components
     
     let hoursPickerView = UIPickerView(frame: .zero)
@@ -36,9 +40,9 @@ class ViewController: UIViewController {
 
     private func configurePickerViews() {
         configure(minutesPickerView)
-        configureSeparator(isFirst: true)
+        configure(separator: .first)
         configure(hoursPickerView)
-        configureSeparator(isFirst: false)
+        configure(separator: .second)
         configure(secondsPickerView)
     }
     
@@ -63,22 +67,23 @@ class ViewController: UIViewController {
         }
     }
     
-    private func configureSeparator(isFirst: Bool) {
-        let separator: SeparatorLabel
+    private func configure(separator: Separator) {
+        let separatorLabel: SeparatorLabel
         
-        if isFirst {
-            separator = firstSeparator
+        switch separator {
+        case .first:
+            separatorLabel = firstSeparator
             view.addSubview(firstSeparator)
-            separator.trailingAnchor.constraint(equalTo: minutesPickerView.leadingAnchor, constant: -separatorPadding).isActive = true
-        } else {
-            separator = secondSeparator
+            separatorLabel.trailingAnchor.constraint(equalTo: minutesPickerView.leadingAnchor, constant: -separatorPadding).isActive = true
+        case .second:
+            separatorLabel = secondSeparator
             view.addSubview(secondSeparator)
-            separator.leadingAnchor.constraint(equalTo: minutesPickerView.trailingAnchor, constant: separatorPadding).isActive = true
+            separatorLabel.leadingAnchor.constraint(equalTo: minutesPickerView.trailingAnchor, constant: separatorPadding).isActive = true
         }
         
         NSLayoutConstraint.activate([
-            separator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            separator.widthAnchor.constraint(equalToConstant: 4),
+            separatorLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            separatorLabel.widthAnchor.constraint(equalToConstant: 4),
         ])
     }
     
