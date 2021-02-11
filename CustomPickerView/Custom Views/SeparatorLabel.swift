@@ -1,5 +1,5 @@
 //
-//  TimePickerView.swift
+//  SeparatorLabel.swift
 //  CustomPickerView
 //
 //  Created by Vanessa Flores on 2/11/21.

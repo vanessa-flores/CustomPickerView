@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A3622A3925D5882C004CB044 /* TimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3622A3825D5882C004CB044 /* TimePickerView.swift */; };
+		A3622A3D25D5B29E004CB044 /* SeparatorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3622A3C25D5B29E004CB044 /* SeparatorLabel.swift */; };
 		A365440A25D4A25700D94ADC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365440925D4A25700D94ADC /* AppDelegate.swift */; };
 		A365440C25D4A25700D94ADC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365440B25D4A25700D94ADC /* SceneDelegate.swift */; };
 		A365440E25D4A25700D94ADC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A365440D25D4A25700D94ADC /* ViewController.swift */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A3622A3825D5882C004CB044 /* TimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerView.swift; sourceTree = "<group>"; };
+		A3622A3C25D5B29E004CB044 /* SeparatorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorLabel.swift; sourceTree = "<group>"; };
 		A365440625D4A25700D94ADC /* CustomPickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomPickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A365440925D4A25700D94ADC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A365440B25D4A25700D94ADC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		A3622A3325D57F6C004CB044 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				A3622A3825D5882C004CB044 /* TimePickerView.swift */,
+				A3622A3C25D5B29E004CB044 /* SeparatorLabel.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -174,9 +174,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A365440E25D4A25700D94ADC /* ViewController.swift in Sources */,
-				A3622A3925D5882C004CB044 /* TimePickerView.swift in Sources */,
 				A365440A25D4A25700D94ADC /* AppDelegate.swift in Sources */,
 				A365440C25D4A25700D94ADC /* SceneDelegate.swift in Sources */,
+				A3622A3D25D5B29E004CB044 /* SeparatorLabel.swift in Sources */,
 				A365442825D4A64500D94ADC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
