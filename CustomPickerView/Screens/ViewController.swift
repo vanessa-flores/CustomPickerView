@@ -34,7 +34,7 @@ class ViewController: UIViewController {
             pickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             pickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             pickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            pickerView.heightAnchor.constraint(equalToConstant: 120)
+            pickerView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
@@ -72,16 +72,25 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         return 70
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         switch component {
         case 0:
-            return String(TimePicker.timeValues(for: .hours)[row])
+            let value = String(TimePicker.timeValues(for: .hours)[row])
+            let view = TimePickerRowView(value: value, timeType: .hours)
+            return view
         case 1:
-            return String(TimePicker.timeValues(for: .minutes)[row])
+            let value = String(TimePicker.timeValues(for: .minutes)[row])
+            let view = TimePickerRowView(value: value, timeType: .minutes)
+            return view
         case 2:
-            return String(TimePicker.timeValues(for: .seconds)[row])
+            let value = String(TimePicker.timeValues(for: .seconds)[row])
+            let view = TimePickerRowView(value: value, timeType: .seconds)
+            return view
         default:
-            return ""
+            let label = UILabel()
+            label.text = ""
+            
+            return label
         }
     }
     
