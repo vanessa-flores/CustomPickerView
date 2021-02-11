@@ -48,8 +48,9 @@ class TimePickerRowView: UIView {
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.text = value
         valueLabel.textAlignment = .center
+        valueLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         
-        let width: CGFloat = timeType == .seconds ? 70 : 62
+        let width: CGFloat = timeType == .seconds ? 70 : 65
         
         NSLayoutConstraint.activate([
             valueLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -63,10 +64,11 @@ class TimePickerRowView: UIView {
         addSubview(separatorLabel)
         separatorLabel.translatesAutoresizingMaskIntoConstraints = false
         separatorLabel.text = ":"
+        separatorLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         
         NSLayoutConstraint.activate([
             separatorLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            separatorLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            separatorLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -6),
             separatorLabel.leadingAnchor.constraint(equalTo: valueLabel.trailingAnchor),
             separatorLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
