@@ -47,24 +47,8 @@ class ViewController: UIViewController {
     }
     
     private func configure(_ pickerView: UIPickerView) {
-        setupPickerView(pickerView)
-        
-        NSLayoutConstraint.activate([
-            pickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            pickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight),
-            pickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
-        ])
-        
-        switch pickerView {
-        case hoursPickerView:
-            pickerView.trailingAnchor.constraint(equalTo: firstSeparator.leadingAnchor, constant: -separatorPadding).isActive = true
-        case minutesPickerView:
-            pickerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        case secondsPickerView:
-            pickerView.leadingAnchor.constraint(equalTo: secondSeparator.trailingAnchor, constant: separatorPadding).isActive = true
-        default:
-            break
-        }
+        setup(pickerView)
+        layoutConstraints(for: pickerView)
     }
     
     private func configure(separator: Separator) {
@@ -89,11 +73,30 @@ class ViewController: UIViewController {
     
     // MARK: - Helpers
     
-    private func setupPickerView(_ pickerView: UIPickerView) {
+    private func setup(_ pickerView: UIPickerView) {
         view.addSubview(pickerView)
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         pickerView.dataSource = self
         pickerView.delegate = self
+    }
+    
+    private func layoutConstraints(for pickerView: UIPickerView) {
+        NSLayoutConstraint.activate([
+            pickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            pickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight),
+            pickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
+        ])
+        
+        switch pickerView {
+        case hoursPickerView:
+            pickerView.trailingAnchor.constraint(equalTo: firstSeparator.leadingAnchor, constant: -separatorPadding).isActive = true
+        case minutesPickerView:
+            pickerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        case secondsPickerView:
+            pickerView.leadingAnchor.constraint(equalTo: secondSeparator.trailingAnchor, constant: separatorPadding).isActive = true
+        default:
+            break
+        }
     }
 }
 
