@@ -55,7 +55,8 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return TimePicker.timeValues(for: .hours).count
         case 1:
             return TimePicker.timeValues(for: .minutes).count
-        case 2: return TimePicker.timeValues(for: .seconds).count
+        case 2:
+            return TimePicker.timeValues(for: .seconds).count
         default:
             return 0
         }
@@ -69,6 +70,19 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return 70
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return String(TimePicker.timeValues(for: .hours)[row])
+        case 1:
+            return String(TimePicker.timeValues(for: .minutes)[row])
+        case 2:
+            return String(TimePicker.timeValues(for: .seconds)[row])
+        default:
+            return ""
+        }
     }
     
 }
