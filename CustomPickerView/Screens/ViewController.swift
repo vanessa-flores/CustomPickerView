@@ -11,7 +11,9 @@ class ViewController: UIViewController {
     
     // MARK: - UI Components
     
-    let pickerView = UIPickerView(frame: .zero)
+    let hoursPickerView = UIPickerView(frame: .zero)
+    let minutesPickerView = UIPickerView(frame: .zero)
+    let secondsPickerView = UIPickerView(frame: .zero)
 
     // MARK: - Lifecycle
     
@@ -19,23 +21,56 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemBackground
-        configurePickerView()
+        configurePickerViews()
     }
     
     // MARK: - UI Configuration
 
-    private func configurePickerView() {
-        view.addSubview(pickerView)
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.dataSource = self
-        pickerView.delegate = self
+    private func configurePickerViews() {
+        configureHoursPickerView()
+        configureMinutesPickerView()
+    }
+    
+    private func configureHoursPickerView() {
+        view.addSubview(hoursPickerView)
+        hoursPickerView.translatesAutoresizingMaskIntoConstraints = false
+        hoursPickerView.dataSource = self
+        hoursPickerView.delegate = self
         
         NSLayoutConstraint.activate([
-            pickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            pickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            pickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            pickerView.heightAnchor.constraint(equalToConstant: 50)
+            hoursPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            hoursPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            hoursPickerView.heightAnchor.constraint(equalToConstant: 50),
+            hoursPickerView.widthAnchor.constraint(equalToConstant: 70)
         ])
+    }
+    
+    private func configureMinutesPickerView() {
+        view.addSubview(minutesPickerView)
+        minutesPickerView.translatesAutoresizingMaskIntoConstraints = false
+        minutesPickerView.dataSource = self
+        minutesPickerView.delegate = self
+        
+        NSLayoutConstraint.activate([
+            minutesPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+//            minutesPickerView.leadingAnchor.constraint(equalTo: )
+        ])
+    }
+    
+    private func configureSeparatorLabel(for timeType: TimePicker.TimeType) {
+        let label = UILabel()
+        label.text = ":"
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+//        let leadingConstraint = NSLayoutConstraint(
+        
+//        NSLayoutConstraint.activate([
+//            label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+//
+//        ])
     }
 }
 
@@ -46,16 +81,17 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     // MARK: - Data Source
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
+        
+        switch pickerView {
+        case hoursPickerView:
             return TimePicker.timeValues(for: .hours).count
-        case 1:
+        case minutesPickerView:
             return TimePicker.timeValues(for: .minutes).count
-        case 2:
+        case secondsPickerView:
             return TimePicker.timeValues(for: .seconds).count
         default:
             return 0
@@ -72,25 +108,16 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         return 70
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        switch component {
-        case 0:
-            let value = String(TimePicker.timeValues(for: .hours)[row])
-            let view = TimePickerRowView(value: value, timeType: .hours)
-            return view
-        case 1:
-            let value = String(TimePicker.timeValues(for: .minutes)[row])
-            let view = TimePickerRowView(value: value, timeType: .minutes)
-            return view
-        case 2:
-            let value = String(TimePicker.timeValues(for: .seconds)[row])
-            let view = TimePickerRowView(value: value, timeType: .seconds)
-            return view
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch pickerView {
+        case hoursPickerView:
+            return String(TimePicker.timeValues(for: .hours)[row])
+        case minutesPickerView:
+            return String(TimePicker.timeValues(for: .minutes)[row])
+        case secondsPickerView:
+            return String(TimePicker.timeValues(for: .seconds)[row])
         default:
-            let label = UILabel()
-            label.text = ""
-            
-            return label
+            return ""
         }
     }
     
