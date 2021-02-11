@@ -35,64 +35,50 @@ class ViewController: UIViewController {
     // MARK: - UI Configuration
 
     private func configurePickerViews() {
-        configureHoursPickerView()
+        configure(minutesPickerView)
         configureSeparator(isFirst: true)
-        configureMinutesPickerView()
+        configure(hoursPickerView)
         configureSeparator(isFirst: false)
-        configureSecondsPickerView()
+        configure(secondsPickerView)
     }
     
-    private func configureHoursPickerView() {
-        setupPickerView(hoursPickerView)
+    private func configure(_ pickerView: UIPickerView) {
+        setupPickerView(pickerView)
         
         NSLayoutConstraint.activate([
-            hoursPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            hoursPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            hoursPickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight),
-            hoursPickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
+            pickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            pickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight),
+            pickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
         ])
-    }
-    
-    private func configureMinutesPickerView() {
-        setupPickerView(minutesPickerView)
         
-        NSLayoutConstraint.activate([
-            minutesPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            minutesPickerView.leadingAnchor.constraint(equalTo: firstSeparator.trailingAnchor, constant: separatorPadding),
-            minutesPickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight),
-            minutesPickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
-        ])
-    }
-    
-    private func configureSecondsPickerView() {
-        setupPickerView(secondsPickerView)
-        
-        NSLayoutConstraint.activate([
-            secondsPickerView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            secondsPickerView.leadingAnchor.constraint(equalTo: secondSeparator.trailingAnchor, constant: separatorPadding),
-            secondsPickerView.heightAnchor.constraint(equalToConstant: 50),
-            secondsPickerView.widthAnchor.constraint(equalToConstant: pickerViewWidth)
-        ])
+        switch pickerView {
+        case hoursPickerView:
+            pickerView.trailingAnchor.constraint(equalTo: firstSeparator.leadingAnchor, constant: -separatorPadding).isActive = true
+        case minutesPickerView:
+            pickerView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        case secondsPickerView:
+            pickerView.leadingAnchor.constraint(equalTo: secondSeparator.trailingAnchor, constant: separatorPadding).isActive = true
+        default:
+            break
+        }
     }
     
     private func configureSeparator(isFirst: Bool) {
-        let leadingAnchor: NSLayoutXAxisAnchor
         let separator: SeparatorLabel
         
         if isFirst {
-            view.addSubview(firstSeparator)
-            leadingAnchor = hoursPickerView.trailingAnchor
             separator = firstSeparator
+            view.addSubview(firstSeparator)
+            separator.trailingAnchor.constraint(equalTo: minutesPickerView.leadingAnchor, constant: -separatorPadding).isActive = true
         } else {
-            view.addSubview(secondSeparator)
-            leadingAnchor = minutesPickerView.trailingAnchor
             separator = secondSeparator
+            view.addSubview(secondSeparator)
+            separator.leadingAnchor.constraint(equalTo: minutesPickerView.trailingAnchor, constant: separatorPadding).isActive = true
         }
         
         NSLayoutConstraint.activate([
             separator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            separator.leadingAnchor.constraint(equalTo: leadingAnchor, constant: separatorPadding),
-            separator.widthAnchor.constraint(equalToConstant: 4)
+            separator.widthAnchor.constraint(equalToConstant: 4),
         ])
     }
     
